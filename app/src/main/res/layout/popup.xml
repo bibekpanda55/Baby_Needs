@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_id"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:padding="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/title"
+            android:textStyle="italic"
+            android:textSize="18sp"
+            android:text="@string/enter_item"
+            android:layout_centerHorizontal="true"/>
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/babyItem"
+            android:hint="@string/hint_item"
+            android:layout_below="@id/title"/>
+
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/itemQuantity"
+            android:hint="@string/hint_qty"
+            android:layout_below="@id/babyItem"
+            android:inputType="number"/>
+
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/itemColor"
+            android:hint="@string/hint_color"
+            android:layout_below="@id/itemQuantity"/>
+
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/itemSize"
+            android:hint="@string/hint_size"
+            android:layout_below="@id/itemColor"
+            android:inputType="number"/>
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/saveButton"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:text="@string/save_button"
+            android:layout_below="@id/itemSize"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="5dp"/>
+    </RelativeLayout>
+
+</LinearLayout>
