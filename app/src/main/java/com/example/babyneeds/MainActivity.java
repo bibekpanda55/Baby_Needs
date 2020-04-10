@@ -11,14 +11,15 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toolbar;
-
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.example.babyneeds.data.DatabaseHandler;
 import com.example.babyneeds.model.Item;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-
+import android.widget.LinearLayout;
 import java.util.List;
 
 
@@ -36,33 +37,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//
-
-
+           coordinatorLayout=findViewById(R.id.main_layout);
+         stripes=findViewById(R.id.striped_layout);
+         animationDrawable= (AnimationDrawable) coordinatorLayout.getBackground();
+         animationDrawable.setEnterFadeDuration(10);
+         animationDrawable.setExitFadeDuration(5000);
+         animationDrawable.start();
+         animationUtils=AnimationUtils.loadAnimation(this,R.anim.stripe_anim);
+         stripes.startAnimation(animationUtils);
 
         databaseHandler = new DatabaseHandler(this);
-
         byPassActivity();
 
-        //check if item was saved
+        
         List<Item> items = databaseHandler.getAllItems();
-        for (Item item : items) {
-            Log.d("Main", "onCreate: " + item.getItemColor());
-        }
-
-
-
-
-
+//         for (Item item : items) {
+//             Log.d("Main", "onCreate: " + item.getItemColor());
+//       
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 createPopupDialog();
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-            }
+              }
         });
     }
 
@@ -96,13 +93,12 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //code to be run
+                
                 dialog.dismiss();
-                //Todo: move to next screen - details screen
                 startActivity(new Intent(MainActivity.this, ListActivity.class));
 
             }
-        }, 1200);// 1sec
+        }, 1200);
     }
 
     private void createPopupDialog() {
@@ -133,8 +129,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         builder.setView(view);
-        dialog = builder.create();// creating our dialog object
-        dialog.show();// important step!
+        dialog = builder.create();
+        dialog.show();
 
 
 
@@ -142,19 +138,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+       getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+      
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
